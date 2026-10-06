@@ -2,7 +2,7 @@
   "name": "jsonschemaapp-mcp",
   "displayName": "JSON Schema App MCP",
   "description": "Connect Claude to the JSON Schema App MCP server: check structured data (JSON-LD / Schema.org), scan your site, audit AI-crawler access and llms.txt, and read your structured-data report.",
-  "version": "0.7.1",
+  "version": "0.8.0",
   "author": {
     "name": "JSON Schema App",
     "url": "https://jsonschemaapp.com"
