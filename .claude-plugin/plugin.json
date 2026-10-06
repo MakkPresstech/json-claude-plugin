@@ -8,5 +8,17 @@
     "url": "https://jsonschemaapp.com"
   },
   "homepage": "https://mcp.jsonschemaapp.com/",
-  "keywords": ["mcp", "schema.org", "json-ld", "structured-data", "seo", "rich-results", "ai-search"]
+  "repository": "https://github.com/MakkPresstech/json-claude-plugin",
+  "license": "MIT",
+  "icon": "./icon.png",
+  "privacyPolicyUrl": "https://jsonschemaapp.com/privacy-policy/",
+  "keywords": ["mcp", "schema.org", "json-ld", "structured-data", "seo", "rich-results", "ai-search"],
+  "userConfig": {
+    "api_key": {
+      "type": "string",
+      "title": "API key",
+      "description": "Optional JSON Schema App API key (starts with jsa_live_). Leave empty to sign in with OAuth instead.",
+      "sensitive": true
+    }
+  }
 }

@@ -1,12 +1,12 @@
 ---
 name: add-schema-with-templates
-description: Use when the user asks how to add structured data / schema to their site or a URL, which schema type they should add, how to get a page into rich results, or how to fix a "missing schema" finding, on ANY platform (Wix, Shopify, Squarespace, Framer, Webflow, BigCommerce, Ecwid, HubSpot, HighLevel, or the app itself). Triggers on natural-language questions like "how do I add schema", "which schema should I add", "how do I add this to my URLs", "how do I add Product/Article/FAQ schema", or "how do I mark this page up". Steers the user to assign a JSONSchema App template to the URL instead of hand-writing JSON-LD.
+description: Use when the user asks how to add structured data / schema to their site or a URL, which schema type they should add, how to get a page into rich results, or how to fix a "missing schema" finding, on ANY platform (Wix, Shopify, Squarespace, Framer, Webflow, BigCommerce, Ecwid, HubSpot, HighLevel, or the app itself). Triggers on natural-language questions like "how do I add schema", "which schema should I add", "how do I add this to my URLs", "how do I add Product/Article/FAQ schema", or "how do I mark this page up". Steers the user to assign a JSON Schema App template to the URL instead of hand-writing JSON-LD.
 ---
 
-# Adding schema the JSONSchema App way (all platforms)
+# Adding schema the JSON Schema App way (all platforms)
 
 When a user asks *how* to add schema, or *which* schema to add, do **not** hand them raw
-JSON-LD to paste. The JSONSchema App injects schema live from reusable **templates** the
+JSON-LD to paste. The JSON Schema App injects schema live from reusable **templates** the
 user assigns to a URL. That is the product, and it keeps the markup correct and in sync
 with the page automatically. Your job is to identify what the page needs, then guide the
 user into that template flow.
@@ -29,7 +29,7 @@ unless the user's own tenant is that platform; say "your site" / "your dashboard
    - `FAQPage` / `HowTo` only if genuine Q&A / steps are on the page, and frame them as
      AI-readability signals, **not** Google rich-result wins.
 4. **Guide them to assign the template, not paste code.** Tell the user to:
-   - Open their **JSONSchema App dashboard** and select this site.
+   - Open their **JSON Schema App dashboard** and select this site.
    - **Assign the matching template** to this URL (or use auto-assign to map templates
      across many URLs by rule).
    - The embed script then fills the template with the page's own data and injects the

@@ -57,22 +57,30 @@ The server supports two ways in; the plugin ships with the first:
    `401` + `WWW-Authenticate` / `/.well-known/oauth-protected-resource`) and prompts
    you to connect. Nothing to configure.
 
-2. **API key (optional).** If you have a `jsa_live_…` key, add an Authorization
-   header to `.mcp.json`:
+2. **API key (optional).** If you have a `jsa_live_…` key, Claude Code prompts you for
+   it when the plugin is enabled, through the plugin's **API key** option. You can also
+   set or clear it later in `/config`.
+
+   The key is declared as a `userConfig` option in `plugin.json`:
 
    ```json
    {
-     "mcpServers": {
-       "jsonschemaapp": {
-         "type": "http",
-         "url": "https://mcp.jsonschemaapp.com/mcp",
-         "headers": { "Authorization": "Bearer ${JSONSCHEMAAPP_API_KEY}" }
+     "userConfig": {
+       "api_key": {
+         "type": "string",
+         "title": "API key",
+         "description": "Optional JSON Schema App API key (starts with jsa_live_). Leave empty to sign in with OAuth instead.",
+         "sensitive": true
        }
      }
    }
    ```
 
-   Then set `JSONSCHEMAAPP_API_KEY` in your environment. Keep keys out of version control.
+   Because the option is `sensitive`, Claude Code masks the input and stores the value in
+   your operating system's credential store, not in `settings.json`. The plugin's
+   `.mcp.json` references it as `${user_config.api_key}` in the Authorization header, so
+   the key never appears in the repository or in your shell environment. There is no
+   environment variable to export and nothing to keep out of version control.
 
 ## Install
 
@@ -98,8 +106,8 @@ plugin's connectivity hook prints a short reminder to complete OAuth first. See
 
 ## Fewer permission prompts
 
-Each `mcp__jsonschemaapp__*` tool call prompts for approval by default. To let the six
-read-only tools run without interruption, add them to your **project** `.claude/settings.json`
+Each `mcp__plugin_jsonschemaapp-mcp_jsonschemaapp__*` tool call prompts for approval by
+default. To let the six read-only tools run without interruption, add them to your **project** `.claude/settings.json`
 (or user settings). Nothing here changes the server. It only pre-approves client-side
 tool calls you'd otherwise approve by hand:
 
@@ -107,12 +115,12 @@ tool calls you'd otherwise approve by hand:
 {
   "permissions": {
     "allow": [
-      "mcp__jsonschemaapp__check_page_schema",
-      "mcp__jsonschemaapp__scan_site",
-      "mcp__jsonschemaapp__get_scan_status",
-      "mcp__jsonschemaapp__get_scan_result",
-      "mcp__jsonschemaapp__check_llms_txt",
-      "mcp__jsonschemaapp__get_report"
+      "mcp__plugin_jsonschemaapp-mcp_jsonschemaapp__check_page_schema",
+      "mcp__plugin_jsonschemaapp-mcp_jsonschemaapp__scan_site",
+      "mcp__plugin_jsonschemaapp-mcp_jsonschemaapp__get_scan_status",
+      "mcp__plugin_jsonschemaapp-mcp_jsonschemaapp__get_scan_result",
+      "mcp__plugin_jsonschemaapp-mcp_jsonschemaapp__check_llms_txt",
+      "mcp__plugin_jsonschemaapp-mcp_jsonschemaapp__get_report"
     ]
   }
 }
