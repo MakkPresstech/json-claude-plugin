@@ -1,8 +1,6 @@
-<!-- Image pending: add the file under docs/images/ then uncomment this block.
 <p align="center">
   <img src="docs/images/banner.png" alt="JSON Schema App MCP for Claude" width="100%">
 </p>
--->
 
 # JSON Schema App MCP: Claude Code Plugin
 
@@ -27,11 +25,9 @@ This plugin is a **client**: it only connects to the hosted MCP server. It does 
 
 The first command that calls a tool opens the connect page in your browser. See [First connection](#first-connection).
 
-<!-- Image pending: add the file under docs/images/ then uncomment this block.
 <p align="center">
   <img src="docs/images/demo.gif" alt="Running a full audit with /jsonschemaapp-mcp:ai-search-audit" width="800">
 </p>
--->
 
 ## Contents
 
@@ -74,6 +70,8 @@ json-claude-plugin/
 ├── hooks/
 │   ├── hooks.json               # SessionStart connectivity reminder
 │   └── connectivity-check.sh    # Non-blocking "connect the server first" notice
+├── docs/
+│   └── images/                  # Banner, demo GIF and screenshots used in this README
 ├── icon.png                     # Plugin icon for the directory listing
 ├── LICENSE                      # MIT
 └── README.md
@@ -121,11 +119,9 @@ You need a JSONSchemaApp account and a pairing code. No account yet?
 2. In another tab, open JSONSchemaApp from your store admin (or sign in at `app.jsonschemaapp.com`), go to **Settings**, then **AI assistant access**, and click **Generate pairing code**.
 3. Copy the 8-character code, paste it on the connect page and click **Allow**. You are sent back to Claude and the command continues.
 
-<!-- Image pending: add the file under docs/images/ then uncomment this block.
 <p align="center">
   <img src="docs/images/connect-page.png" alt="The Connect an AI assistant page with the pairing code field" width="800">
 </p>
--->
 
 The connection is read-only: Claude can read your schema reports and scan results but cannot change your store. Disconnect anytime from **Settings**, **AI assistant access**.
 
@@ -255,11 +251,9 @@ P3 (incremental)
 Scanned 120 pages, 98 with valid JSON-LD. Plan: Pro, 1,840 AI credits left. [get_report]
 ```
 
-<!-- Image pending: add the file under docs/images/ then uncomment this block.
 <p align="center">
   <img src="docs/images/report-terminal.png" alt="Audit report rendered in Claude Code" width="800">
 </p>
--->
 
 ## Skills (model-invoked)
 

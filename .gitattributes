@@ -1,3 +1,11 @@
 # Keep LF in the repo so the hook script runs on macOS/Linux after clone
 * text=auto eol=lf
 *.sh text eol=lf
+
+# Image assets are binary: never apply text or eol conversion
+*.png binary
+*.gif binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.ico binary
