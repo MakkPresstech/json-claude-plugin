@@ -1,8 +1,52 @@
+<!-- Image pending: add the file under docs/images/ then uncomment this block.
+<p align="center">
+  <img src="docs/images/banner.png" alt="JSON Schema App MCP for Claude" width="100%">
+</p>
+-->
+
 # JSON Schema App MCP: Claude Code Plugin
+
+<p>
+  <img src="https://img.shields.io/badge/version-0.8.0-4f46e5" alt="Version">
+  <img src="https://img.shields.io/badge/MCP-compatible-0f8a5f" alt="MCP compatible">
+  <img src="https://img.shields.io/badge/auth-OAuth-7c3aed" alt="OAuth">
+  <img src="https://img.shields.io/badge/license-MIT-6b6e86" alt="License">
+</p>
 
 Connects Claude to the **JSON Schema App MCP server** (`https://mcp.jsonschemaapp.com/mcp`) so you can check structured data (JSON-LD / Schema.org), scan your site, audit AI-crawler access, and read your structured-data report, right from Claude.
 
 This plugin is a **client**: it only connects to the hosted MCP server. It does not change or redeploy any server code, so nothing in the existing MCP/app flow is affected.
+
+## Quick start
+
+```
+/plugin marketplace add MakkPresstech/json-claude-plugin
+/plugin install jsonschemaapp-mcp@jsonschemaapp
+/jsonschemaapp-mcp:report
+```
+
+The first command that calls a tool opens the connect page in your browser. See [First connection](#first-connection).
+
+<!-- Image pending: add the file under docs/images/ then uncomment this block.
+<p align="center">
+  <img src="docs/images/demo.gif" alt="Running a full audit with /jsonschemaapp-mcp:ai-search-audit" width="800">
+</p>
+-->
+
+## Contents
+
+- [What's inside](#whats-inside)
+- [MCP tools exposed by the server](#mcp-tools-exposed-by-the-server)
+- [First connection](#first-connection)
+- [Authentication](#authentication)
+- [Install](#install)
+- [Fewer permission prompts](#fewer-permission-prompts)
+- [Usage](#usage)
+- [Example output](#example-output)
+- [Skills (model-invoked)](#skills-model-invoked)
+- [Consistent, grounded audits](#consistent-grounded-audits)
+- [Troubleshooting](#troubleshooting)
+- [Note on FAQPage / HowTo](#note-on-faqpage--howto)
 
 ## What's inside
 
@@ -30,7 +74,27 @@ json-claude-plugin/
 ├── hooks/
 │   ├── hooks.json               # SessionStart connectivity reminder
 │   └── connectivity-check.sh    # Non-blocking "connect the server first" notice
+├── icon.png                     # Plugin icon for the directory listing
+├── LICENSE                      # MIT
 └── README.md
+```
+
+### How the pieces fit together
+
+```mermaid
+flowchart LR
+    subgraph Plugin["json-claude-plugin (client)"]
+        CMD[Slash commands]
+        SK[Skills]
+        AG[schema-auditor subagent]
+    end
+    CMD --> MCP
+    SK --> MCP
+    AG --> MCP
+    MCP["mcp.jsonschemaapp.com/mcp"] --> T1[check_page_schema]
+    MCP --> T2[scan_site / get_scan_status / get_scan_result]
+    MCP --> T3[check_llms_txt]
+    MCP --> T4[get_report]
 ```
 
 ## MCP tools exposed by the server
@@ -48,9 +112,43 @@ json-claude-plugin/
 > `fix_ai_crawler_access`, `check_schema_coverage`, `assign_schema_template`) which
 > surface automatically in Claude's prompt picker when connected as a Webflow store.
 
+## First connection
+
+You need a JSONSchemaApp account and a pairing code. No account yet?
+[Create one free](https://app.jsonschemaapp.com/register.php), install the app on your store, then continue below.
+
+1. In Claude Code, run any command, for example `/jsonschemaapp-mcp:report`. Your browser opens the **Connect an AI assistant** page.
+2. In another tab, open JSONSchemaApp from your store admin (or sign in at `app.jsonschemaapp.com`), go to **Settings**, then **AI assistant access**, and click **Generate pairing code**.
+3. Copy the 8-character code, paste it on the connect page and click **Allow**. You are sent back to Claude and the command continues.
+
+<!-- Image pending: add the file under docs/images/ then uncomment this block.
+<p align="center">
+  <img src="docs/images/connect-page.png" alt="The Connect an AI assistant page with the pairing code field" width="800">
+</p>
+-->
+
+The connection is read-only: Claude can read your schema reports and scan results but cannot change your store. Disconnect anytime from **Settings**, **AI assistant access**.
+
+```mermaid
+sequenceDiagram
+    participant U as You
+    participant C as Claude Code
+    participant M as mcp.jsonschemaapp.com
+    participant A as JSONSchemaApp dashboard
+    U->>C: /jsonschemaapp-mcp:report
+    C->>M: Tool call (no token yet)
+    M-->>C: 401 + WWW-Authenticate
+    C->>U: Opens browser to the connect page
+    U->>A: Settings, AI assistant access, Generate pairing code
+    U->>M: Paste code, click Allow
+    M-->>C: OAuth token
+    C->>M: get_report
+    M-->>C: Report data
+```
+
 ## Authentication
 
-The plugin's only built-in auth path is OAuth. Nothing to configure.
+The plugin's only built-in auth path is OAuth. There is nothing to configure in the plugin itself; the only manual step is the pairing code above.
 
 `.mcp.json` points at the HTTP endpoint with no credentials, so on first use Claude
 discovers the OAuth flow automatically (via the server's `401` + `WWW-Authenticate` and
@@ -95,7 +193,8 @@ git clone https://github.com/MakkPresstech/json-claude-plugin.git
 claude --plugin-dir ./json-claude-plugin
 ```
 
-Verify the connection with `/mcp` (the `jsonschemaapp` server should list as connected),
+Verify the connection with `/mcp` (the server lists as
+`plugin:jsonschemaapp-mcp:jsonschemaapp` when installed as a plugin),
 then run `/jsonschemaapp-mcp:report` to confirm the tools respond. On session start the
 plugin's connectivity hook prints a short reminder to complete OAuth first. See
 [Fewer permission prompts](#fewer-permission-prompts).
@@ -135,6 +234,33 @@ tool calls you'd otherwise approve by hand:
 Or just ask in natural language (e.g. "audit my store's structured data") and the
 `schema-auditor` subagent will drive the tools for you.
 
+## Example output
+
+A shortened `/jsonschemaapp-mcp:ai-search-audit` result for a sample store:
+
+```
+Verdict: Product schema is solid, but AI crawlers are blocked and llms.txt is missing.
+
+P1 (blocking)
+- robots.txt disallows GPTBot and ClaudeBot on all paths.          [check_llms_txt]
+- 14 product pages missing "offers.price" in Product schema.        [get_scan_result]
+
+P2 (high value)
+- No llms.txt at example.com/llms.txt.                              [check_llms_txt]
+- Organization schema has no "sameAs" social profiles.              [check_page_schema]
+
+P3 (incremental)
+- 6 blog posts use Article without "dateModified".                  [get_scan_result]
+
+Scanned 120 pages, 98 with valid JSON-LD. Plan: Pro, 1,840 AI credits left. [get_report]
+```
+
+<!-- Image pending: add the file under docs/images/ then uncomment this block.
+<p align="center">
+  <img src="docs/images/report-terminal.png" alt="Audit report rendered in Claude Code" width="800">
+</p>
+-->
+
 ## Skills (model-invoked)
 
 Unlike the slash commands (which you trigger explicitly), the bundled **skills** load
@@ -167,6 +293,18 @@ skills share three conventions (all client-side prompt guidance, no server chang
 - **Pagination discipline.** `get_scan_result` is read with `only_issues: true` and
   `limit: 50`, paging via `offset`, so large scans don't flood context; the full
   inventory (`only_issues: false`) is pulled only when actually needed.
+
+## Troubleshooting
+
+| Problem | Fix |
+|---------|-----|
+| `/mcp` shows `plugin:jsonschemaapp-mcp:jsonschemaapp` as not connected | Run any plugin command to start OAuth, or select the server in `/mcp` and choose authenticate. |
+| The connect page says the code is invalid | Codes expire. Generate a fresh one under **Settings**, **AI assistant access** and paste it within a few minutes. |
+| The connect page is locked | 5 wrong codes lock the page for 15 minutes. Wait, then use a newly generated code. |
+| Confusing connection errors after adding an API key | Your key server reuses the name `jsonschemaapp`. Remove it and re-add it as `jsonschemaapp-key`. |
+| Tools suddenly return 401 | The connection was revoked or expired. Reconnect through `/mcp` and enter a new pairing code. |
+| `check_page_schema` or `check_llms_txt` returns a rate-limit error | These tools allow 10 calls per minute. Wait a minute and retry. |
+| Every tool call asks for approval | Add the allow list from [Fewer permission prompts](#fewer-permission-prompts). |
 
 ## Note on FAQPage / HowTo
 
