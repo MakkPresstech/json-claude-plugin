@@ -15,9 +15,9 @@ Before using the structured-data tools (check_page_schema, scan_site,
 get_scan_status, get_scan_result, check_llms_txt, get_report):
 
   1. Run /mcp and confirm the `jsonschemaapp` server shows as connected.
-  2. If it is not connected, complete the OAuth prompt, or set the plugin's
-     "API key" option in /config if you use a jsa_live_ key instead. Tools
-     will return 401 until one of those is done.
+  2. If it is not connected, complete the OAuth prompt. Tools will return
+     401 until you do. To use a jsa_live_ API key instead of OAuth, add your
+     own user-scope MCP server as the plugin README describes.
 
 Quick check once connected: /jsonschemaapp-mcp:report
 NOTE

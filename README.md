@@ -50,37 +50,33 @@ json-claude-plugin/
 
 ## Authentication
 
-The server supports two ways in; the plugin ships with the first:
+The plugin's only built-in auth path is OAuth. Nothing to configure.
 
-1. **OAuth (default).** `.mcp.json` points at the HTTP endpoint with no credentials.
-   On first use Claude discovers the OAuth flow automatically (via the server's
-   `401` + `WWW-Authenticate` / `/.well-known/oauth-protected-resource`) and prompts
-   you to connect. Nothing to configure.
+`.mcp.json` points at the HTTP endpoint with no credentials, so on first use Claude
+discovers the OAuth flow automatically (via the server's `401` + `WWW-Authenticate` and
+`/.well-known/oauth-protected-resource`) and prompts you to connect.
 
-2. **API key (optional).** If you have a `jsa_live_…` key, Claude Code prompts you for
-   it when the plugin is enabled, through the plugin's **API key** option. You can also
-   set or clear it later in `/config`.
+### Using an API key instead
 
-   The key is declared as a `userConfig` option in `plugin.json`:
+If you prefer a `jsa_live_...` key, add your own user-scope MCP server alongside the
+plugin. The plugin does not ship a key option, because Claude Code disables OAuth
+fallback for any server whose config sets an `Authorization` header, which would take
+the OAuth path away from everyone who does not use a key.
 
-   ```json
-   {
-     "userConfig": {
-       "api_key": {
-         "type": "string",
-         "title": "API key",
-         "description": "Optional JSON Schema App API key (starts with jsa_live_). Leave empty to sign in with OAuth instead.",
-         "sensitive": true
-       }
-     }
-   }
-   ```
+```bash
+claude mcp add --scope user --transport http -H "Authorization: Bearer YOUR_API_KEY" jsonschemaapp-key https://mcp.jsonschemaapp.com/mcp
+```
 
-   Because the option is `sensitive`, Claude Code masks the input and stores the value in
-   your operating system's credential store, not in `settings.json`. The plugin's
-   `.mcp.json` references it as `${user_config.api_key}` in the Authorization header, so
-   the key never appears in the repository or in your shell environment. There is no
-   environment variable to export and nothing to keep out of version control.
+Replace `YOUR_API_KEY` with your own key. Two things to note:
+
+- **Pick a server name other than `jsonschemaapp`.** The example uses
+  `jsonschemaapp-key`. Reusing the plugin's own server name shadows it, and you then get
+  confusing connection errors because both entries claim the same name.
+- Your key lives in your personal Claude Code config, not in this repository. Keep it
+  out of version control, and revoke it in your dashboard under Settings if it leaks.
+
+With a key configured this way, disable the plugin's own server in `/mcp` so you are not
+connected twice.
 
 ## Install
 
