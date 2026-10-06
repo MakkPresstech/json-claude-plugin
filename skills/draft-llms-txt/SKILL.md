@@ -1,6 +1,6 @@
 ---
 name: draft-llms-txt
-description: Use when the user wants to create, write, or draft an llms.txt or llms-full.txt file for their site — e.g. "generate an llms.txt", "write me an llms.txt", "my llms.txt is missing, make one". Produces a valid draft the user can host, using the JSON Schema App MCP tools (check_llms_txt, scan_site, get_scan_result, get_report) for grounding.
+description: Use when the user wants to create, write, or draft an llms.txt or llms-full.txt file for their site, e.g. "generate an llms.txt", "write me an llms.txt", "my llms.txt is missing, make one". Produces a valid draft the user can host, using the JSON Schema App MCP tools (check_llms_txt, scan_site, get_scan_result, get_report) for grounding.
 ---
 
 # Draft an `llms.txt` / `llms-full.txt` (via JSON Schema App MCP)
@@ -8,17 +8,17 @@ description: Use when the user wants to create, write, or draft an llms.txt or l
 The JSON Schema App server only **checks** `llms.txt` (via `check_llms_txt`); it does not
 generate one. This skill fills that gap on the client side: it drafts a valid file from
 what the server already knows about the site. The draft is text the user hosts
-themselves — nothing is deployed to the server, and no server behavior changes.
+themselves. Nothing is deployed to the server, and no server behavior changes.
 
 ## Ground the draft in real data first
 
 Do not invent the site's structure. Pull facts from the MCP tools, then draft:
 
-1. `check_llms_txt` — see whether an `llms.txt` / `llms-full.txt` already exists, its
+1. `check_llms_txt` shows whether an `llms.txt` / `llms-full.txt` already exists, its
    grade, and what's wrong with it. If one exists, improve it rather than replacing it
    wholesale.
-2. `get_report` — confirm the real domain and plan.
-3. `scan_site` → `get_scan_status` → `get_scan_result` — if a recent scan exists or the
+2. `get_report` confirms the real domain and plan.
+3. `scan_site` → `get_scan_status` → `get_scan_result`: if a recent scan exists or the
    user is willing to run one, use the discovered pages (home, key products/collections,
    docs, policies) as the real link list. Prefer the highest-scoring, most important
    pages. When polling `get_scan_status`, back off between polls (first poll ~5s, then
@@ -52,7 +52,7 @@ Rules for a valid, high-grade file:
 - Start with a single `# H1` site title, then a `>` blockquote summary.
 - Group links under `##` section headers; every bullet is a `[name](absolute-url):
   description` line with an **absolute** URL.
-- Keep it concise — `llms.txt` is an index, not a content dump. Put the full content
+- Keep it concise. `llms.txt` is an index, not a content dump. Put the full content
   into `llms-full.txt` only after `llms.txt` is solid.
 - Use real, reachable URLs from the scan. Never fabricate paths.
 
@@ -61,7 +61,7 @@ Rules for a valid, high-grade file:
 - Show the draft in a code block and tell the user to host it at `/llms.txt`.
 - Offer to run `check_llms_txt` again after they deploy it to confirm the grade improved.
 - If robots.txt is blocking AI crawlers, drafting `llms.txt` won't help until that's
-  fixed — hand off to [[ai-crawler-access]] first.
+  fixed, so hand off to [[ai-crawler-access]] first.
 
 ## Rules
 

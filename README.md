@@ -1,6 +1,6 @@
-# JSON Schema App MCP — Claude Code Plugin
+# JSON Schema App MCP: Claude Code Plugin
 
-Connects Claude to the **JSON Schema App MCP server** (`https://mcp.jsonschemaapp.com/mcp`) so you can check structured data (JSON-LD / Schema.org), scan your site, audit AI-crawler access, and read your structured-data report — right from Claude.
+Connects Claude to the **JSON Schema App MCP server** (`https://mcp.jsonschemaapp.com/mcp`) so you can check structured data (JSON-LD / Schema.org), scan your site, audit AI-crawler access, and read your structured-data report, right from Claude.
 
 This plugin is a **client**: it only connects to the hosted MCP server. It does not change or redeploy any server code, so nothing in the existing MCP/app flow is affected.
 
@@ -93,14 +93,14 @@ claude --plugin-dir ./json-claude-plugin
 
 Verify the connection with `/mcp` (the `jsonschemaapp` server should list as connected),
 then run `/jsonschemaapp-mcp:report` to confirm the tools respond. On session start the
-plugin's connectivity hook prints a short reminder to complete OAuth first — see
+plugin's connectivity hook prints a short reminder to complete OAuth first. See
 [Fewer permission prompts](#fewer-permission-prompts).
 
 ## Fewer permission prompts
 
 Each `mcp__jsonschemaapp__*` tool call prompts for approval by default. To let the six
 read-only tools run without interruption, add them to your **project** `.claude/settings.json`
-(or user settings). Nothing here changes the server — it only pre-approves client-side
+(or user settings). Nothing here changes the server. It only pre-approves client-side
 tool calls you'd otherwise approve by hand:
 
 ```json
@@ -128,13 +128,13 @@ tool calls you'd otherwise approve by hand:
 /jsonschemaapp-mcp:ai-search-audit               # full readiness audit
 ```
 
-Or just ask in natural language — e.g. "audit my store's structured data" — and the
+Or just ask in natural language (e.g. "audit my store's structured data") and the
 `schema-auditor` subagent will drive the tools for you.
 
 ## Skills (model-invoked)
 
 Unlike the slash commands (which you trigger explicitly), the bundled **skills** load
-automatically when your request matches their description — no command needed:
+automatically when your request matches their description. No command needed:
 
 | Skill | Activates when you… |
 |-------|---------------------|
@@ -143,7 +143,7 @@ automatically when your request matches their description — no command needed:
 | `ai-search-optimization` | ask about AI search visibility, GEO, `llms.txt`, or whether AI crawlers can reach your site. |
 | `draft-llms-txt` | ask to write/generate an `llms.txt` or `llms-full.txt`. Drafts a valid file from scan data (the server only *checks* llms.txt). |
 | `ai-crawler-access` | ask to unblock GPTBot/ClaudeBot/PerplexityBot etc. Gives copy-paste `robots.txt` snippets for any platform (not just Webflow). |
-| `audit-report-format` | reference used whenever results are reported — defines the one-line-verdict + P1/P2/P3 + tool-citation shape so every audit reads the same. |
+| `audit-report-format` | reference used whenever results are reported. Defines the one-line-verdict + P1/P2/P3 + tool-citation shape so every audit reads the same. |
 
 They carry the same workflow and rules as the commands/subagent (including the
 FAQPage/HowTo rich-result rule) so behavior stays consistent however you invoke it.
@@ -151,12 +151,12 @@ FAQPage/HowTo rich-result rule) so behavior stays consistent however you invoke 
 ## Consistent, grounded audits
 
 So every audit reads the same way and stays efficient, the commands, subagent, and
-skills share three conventions (all client-side prompt guidance — no server change):
+skills share three conventions (all client-side prompt guidance, no server change):
 
 - **Standard report format.** Every answer leads with a one-line verdict, then findings
   grouped **P1 (blocking)** → **P2 (high value)** → **P3 (incremental)**, each citing the
   tool that produced it. Defined once in the `audit-report-format` skill. Findings must
-  trace to real tool output — no invented scores or errors.
+  trace to real tool output, with no invented scores or errors.
 - **Poll backoff for scans.** After `scan_site`, `get_scan_status` is polled with a
   backoff (first poll ~5s, then 5s → 10s → 20s → 30s, ~30s thereafter) instead of a tight
   loop.

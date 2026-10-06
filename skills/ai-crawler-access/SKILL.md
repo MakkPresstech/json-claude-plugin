@@ -1,23 +1,23 @@
 ---
 name: ai-crawler-access
-description: Use when the user wants to fix or allow AI-crawler access in robots.txt — e.g. "let ChatGPT/Claude crawl my site", "unblock GPTBot", "what robots.txt do I need for AI search", on any platform (Shopify, WordPress, custom, etc.). Verifies the current state with the JSON Schema App MCP check_llms_txt tool, then gives copy-paste robots.txt snippets.
+description: Use when the user wants to fix or allow AI-crawler access in robots.txt, e.g. "let ChatGPT/Claude crawl my site", "unblock GPTBot", "what robots.txt do I need for AI search", on any platform (Shopify, WordPress, custom, etc.). Verifies the current state with the JSON Schema App MCP check_llms_txt tool, then gives copy-paste robots.txt snippets.
 ---
 
 # Fix AI-crawler access in robots.txt (via JSON Schema App MCP)
 
 The server's `fix_ai_crawler_access` starter prompt is **Webflow-only**. This client-side
 skill gives the same kind of robots.txt guidance to **every** user (Shopify, WordPress,
-custom hosting, etc.). It only produces text the user adds to their own `robots.txt` —
-no server change, no deploy.
+custom hosting, etc.). It only produces text the user adds to their own `robots.txt`,
+with no server change and no deploy.
 
 ## Verify before prescribing
 
 Always call `check_llms_txt` first and report which crawlers robots.txt is **currently**
-blocking — don't assume. Pass `domain` if the user named one; otherwise omit it to use
+blocking. Don't assume. Pass `domain` if the user named one; otherwise omit it to use
 the connected account's site. The tool is rate-limited to 10/min.
 
 Only recommend changes for crawlers that are actually blocked, and confirm the user
-*wants* AI visibility (some sites intentionally block AI training crawlers — respect
+*wants* AI visibility (some sites intentionally block AI training crawlers, so respect
 that choice and call it out).
 
 ## The major AI crawlers
@@ -99,7 +99,7 @@ Disallow: /
 
 - Have the user deploy robots.txt, then re-run `check_llms_txt` to confirm the crawlers
   are no longer blocked.
-- Unblocking crawlers is step one; an `llms.txt` index helps them next — hand off to
+- Unblocking crawlers is step one; an `llms.txt` index helps them next, so hand off to
   [[draft-llms-txt]]. For the broader picture see [[ai-search-optimization]].
 
 ## Rules
@@ -108,5 +108,5 @@ Disallow: /
 - When reporting the current state, use the standard report format (see
   [[audit-report-format]]): a one-line verdict, blocked-crawler findings cited to
   `check_llms_txt`, then the robots.txt snippet as the next step.
-- `robots.txt` directives are advisory — well-behaved crawlers honor them, but it is not
+- `robots.txt` directives are advisory: well-behaved crawlers honor them, but it is not
   an access-control mechanism. Say so if the user expects enforcement.
