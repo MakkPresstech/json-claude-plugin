@@ -1,0 +1,25 @@
+{
+  "name": "jsonschemaapp",
+  "owner": {
+    "name": "JSON Schema App",
+    "url": "https://jsonschemaapp.com"
+  },
+  "metadata": {
+    "description": "Marketplace for the JSON Schema App MCP client plugin."
+  },
+  "plugins": [
+    {
+      "name": "jsonschemaapp-mcp",
+      "displayName": "JSON Schema App MCP",
+      "source": "./",
+      "description": "Connect Claude to the JSON Schema App MCP server: check structured data (JSON-LD / Schema.org), scan your site, audit AI-crawler access and llms.txt, and read your structured-data report.",
+      "version": "0.7.1",
+      "author": {
+        "name": "JSON Schema App",
+        "url": "https://jsonschemaapp.com"
+      },
+      "homepage": "https://mcp.jsonschemaapp.com/",
+      "keywords": ["mcp", "schema.org", "json-ld", "structured-data", "seo", "rich-results", "ai-search"]
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "jsonschemaapp": {
+      "type": "http",
+      "url": "https://mcp.jsonschemaapp.com/mcp"
+    }
+  }
+}

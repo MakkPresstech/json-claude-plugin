@@ -1,0 +1,7 @@
+# Local machine state, not plugin content
+.claude/settings.local.json
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.swp
