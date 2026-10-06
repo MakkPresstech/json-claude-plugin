@@ -3,7 +3,7 @@ description: Scan the structured data of the whole site connected to this accoun
 argument-hint: [max_pages]
 ---
 
-Run a full structured-data scan of the site connected to this account using the JSONSchemaApp MCP tools, then report the findings.
+Run a full structured-data scan of the site connected to this account using the JSON Schema App MCP tools, then report the findings.
 
 Optional page cap from the user (defaults to 100 if empty, capped by the account's plan): **$ARGUMENTS**
 

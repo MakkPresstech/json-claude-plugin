@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# SessionStart guard for the JSONSchemaApp MCP plugin.
+# SessionStart guard for the JSON Schema App MCP plugin.
 #
 # This is a non-blocking reminder only: it never fails and never mutates state.
 # It cannot see Claude's live MCP connection status, so it just surfaces the
@@ -9,7 +9,7 @@
 # Exit 0 always so a missing or odd environment can never break a session.
 
 cat <<'NOTE'
-JSONSchemaApp MCP plugin loaded.
+JSON Schema App MCP plugin loaded.
 
 Before using the structured-data tools (check_page_schema, scan_site,
 get_scan_status, get_scan_result, check_llms_txt, get_report):

@@ -1,11 +1,11 @@
 ---
 name: structured-data-audit
-description: Use when the user wants to audit, check, or improve the JSON-LD / Schema.org structured data on their website or a single page — e.g. "audit my store's schema", "why am I not getting rich results", "check my product markup". Drives the JSONSchemaApp MCP tools (get_report, scan_site, get_scan_status, get_scan_result, check_page_schema) end to end.
+description: Use when the user wants to audit, check, or improve the JSON-LD / Schema.org structured data on their website or a single page — e.g. "audit my store's schema", "why am I not getting rich results", "check my product markup". Drives the JSON Schema App MCP tools (get_report, scan_site, get_scan_status, get_scan_result, check_page_schema) end to end.
 ---
 
-# Structured-data audit (via JSONSchemaApp MCP)
+# Structured-data audit (via JSON Schema App MCP)
 
-All structured-data findings come from the JSONSchemaApp MCP tools — never invent
+All structured-data findings come from the JSON Schema App MCP tools — never invent
 schema results, validation errors, or scores. If the tools aren't reachable, tell the
 user to connect the server (OAuth) or set their `jsa_live_` API key; don't guess.
 

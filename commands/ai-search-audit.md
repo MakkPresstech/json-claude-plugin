@@ -3,7 +3,7 @@ description: Full AI-search readiness audit of your site — structured data, sc
 argument-hint: [domain]
 ---
 
-Run a complete AI-search readiness audit of the site connected to this account, combining every JSONSchemaApp MCP tool. This mirrors the server's `optimize_for_ai_search` flow.
+Run a complete AI-search readiness audit of the site connected to this account, combining every JSON Schema App MCP tool. This mirrors the server's `optimize_for_ai_search` flow.
 
 Optional domain override from the user: **$ARGUMENTS**
 

@@ -1,12 +1,12 @@
 ---
 name: audit-report-format
-description: Reference for the standard shape of every JSONSchemaApp audit answer — a one-line verdict, findings grouped by P1/P2/P3 priority, each citing the tool that produced it. Use when reporting results from any JSONSchemaApp MCP tool (get_report, scan_site, get_scan_result, check_page_schema, check_llms_txt) so every audit reads the same way.
+description: Reference for the standard shape of every JSON Schema App audit answer — a one-line verdict, findings grouped by P1/P2/P3 priority, each citing the tool that produced it. Use when reporting results from any JSON Schema App MCP tool (get_report, scan_site, get_scan_result, check_page_schema, check_llms_txt) so every audit reads the same way.
 ---
 
 # Standard audit report format
 
 Every audit, scan summary, page check, or crawler-access report built on the
-JSONSchemaApp MCP tools should use this one shape, so results read consistently and are
+JSON Schema App MCP tools should use this one shape, so results read consistently and are
 always traceable back to real tool output.
 
 ## The shape

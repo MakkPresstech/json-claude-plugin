@@ -1,11 +1,11 @@
 ---
 name: draft-llms-txt
-description: Use when the user wants to create, write, or draft an llms.txt or llms-full.txt file for their site — e.g. "generate an llms.txt", "write me an llms.txt", "my llms.txt is missing, make one". Produces a valid draft the user can host, using the JSONSchemaApp MCP tools (check_llms_txt, scan_site, get_scan_result, get_report) for grounding.
+description: Use when the user wants to create, write, or draft an llms.txt or llms-full.txt file for their site — e.g. "generate an llms.txt", "write me an llms.txt", "my llms.txt is missing, make one". Produces a valid draft the user can host, using the JSON Schema App MCP tools (check_llms_txt, scan_site, get_scan_result, get_report) for grounding.
 ---
 
-# Draft an `llms.txt` / `llms-full.txt` (via JSONSchemaApp MCP)
+# Draft an `llms.txt` / `llms-full.txt` (via JSON Schema App MCP)
 
-The JSONSchemaApp server only **checks** `llms.txt` (via `check_llms_txt`); it does not
+The JSON Schema App server only **checks** `llms.txt` (via `check_llms_txt`); it does not
 generate one. This skill fills that gap on the client side: it drafts a valid file from
 what the server already knows about the site. The draft is text the user hosts
 themselves — nothing is deployed to the server, and no server behavior changes.

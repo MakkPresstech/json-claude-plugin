@@ -1,9 +1,9 @@
 ---
 name: ai-search-optimization
-description: Use when the user asks about AI search visibility, GEO, llms.txt / llms-full.txt, or whether AI crawlers (GPTBot, ClaudeBot, PerplexityBot, Google-Extended) can access their site. Drives the JSONSchemaApp MCP check_llms_txt tool and turns its findings into prioritized fixes.
+description: Use when the user asks about AI search visibility, GEO, llms.txt / llms-full.txt, or whether AI crawlers (GPTBot, ClaudeBot, PerplexityBot, Google-Extended) can access their site. Drives the JSON Schema App MCP check_llms_txt tool and turns its findings into prioritized fixes.
 ---
 
-# AI-search / crawler-access optimization (via JSONSchemaApp MCP)
+# AI-search / crawler-access optimization (via JSON Schema App MCP)
 
 Use the `check_llms_txt` MCP tool for all crawler-access findings — don't assert what a
 site serves without calling it. The tool works on any public domain and is rate-limited

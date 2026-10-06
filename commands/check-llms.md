@@ -3,7 +3,7 @@ description: Check a site's llms.txt, llms-full.txt, and whether robots.txt bloc
 argument-hint: [domain]
 ---
 
-Use the JSONSchemaApp MCP tool `check_llms_txt` to audit a site's AI-crawler readiness.
+Use the JSON Schema App MCP tool `check_llms_txt` to audit a site's AI-crawler readiness.
 
 Domain from the user (optional — if empty, the tool checks the site connected to this account): **$ARGUMENTS**
 

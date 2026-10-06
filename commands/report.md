@@ -2,7 +2,7 @@
 description: Get the combined structured-data report for the site connected to this account.
 ---
 
-Call the JSONSchemaApp MCP tool `get_report` to pull the combined structured-data report for the site connected to this account.
+Call the JSON Schema App MCP tool `get_report` to pull the combined structured-data report for the site connected to this account.
 
 Then summarize for the user, leading with a one-line verdict (overall state) per the standard report format (see [[audit-report-format]]):
 - The site domain and which platform features are available (`dashboard_scan`, `credits`, `publish`).

@@ -1,17 +1,17 @@
 ---
 name: schema-rich-results
-description: Reference for how Schema.org / JSON-LD types map to Google rich results and AI readability. Use when interpreting JSONSchemaApp scan findings, deciding which markup to recommend, or when the user asks which schema types are "worth it", what properties are required, or why FAQPage/HowTo stopped showing rich results.
+description: Reference for how Schema.org / JSON-LD types map to Google rich results and AI readability. Use when interpreting JSON Schema App scan findings, deciding which markup to recommend, or when the user asks which schema types are "worth it", what properties are required, or why FAQPage/HowTo stopped showing rich results.
 ---
 
 # Schema.org → rich-result reference
 
-Interpretation guidance for findings returned by the JSONSchemaApp MCP tools
+Interpretation guidance for findings returned by the JSON Schema App MCP tools
 (`check_page_schema`, `get_scan_result`). The tools are the source of truth for what a
 page actually has; this skill is how to judge what it's worth.
 
 ## The FAQPage / HowTo rule (do not get this wrong)
 
-**FAQPage and HowTo markup no longer produce Google rich results.** The JSONSchemaApp
+**FAQPage and HowTo markup no longer produce Google rich results.** The JSON Schema App
 tools report them at the `ai_readability` level — useful for AI assistants and LLM
 answer engines, not for Google rich snippets.
 

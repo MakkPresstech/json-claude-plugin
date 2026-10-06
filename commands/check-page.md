@@ -3,7 +3,7 @@ description: Check the structured data (JSON-LD / Schema.org) on a single public
 argument-hint: <page-url>
 ---
 
-Use the JSONSchemaApp MCP tool `check_page_schema` to inspect the structured data on this page:
+Use the JSON Schema App MCP tool `check_page_schema` to inspect the structured data on this page:
 
 **$ARGUMENTS**
 

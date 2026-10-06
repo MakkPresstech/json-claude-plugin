@@ -1,9 +1,9 @@
 ---
 name: ai-crawler-access
-description: Use when the user wants to fix or allow AI-crawler access in robots.txt — e.g. "let ChatGPT/Claude crawl my site", "unblock GPTBot", "what robots.txt do I need for AI search", on any platform (Shopify, WordPress, custom, etc.). Verifies the current state with the JSONSchemaApp MCP check_llms_txt tool, then gives copy-paste robots.txt snippets.
+description: Use when the user wants to fix or allow AI-crawler access in robots.txt — e.g. "let ChatGPT/Claude crawl my site", "unblock GPTBot", "what robots.txt do I need for AI search", on any platform (Shopify, WordPress, custom, etc.). Verifies the current state with the JSON Schema App MCP check_llms_txt tool, then gives copy-paste robots.txt snippets.
 ---
 
-# Fix AI-crawler access in robots.txt (via JSONSchemaApp MCP)
+# Fix AI-crawler access in robots.txt (via JSON Schema App MCP)
 
 The server's `fix_ai_crawler_access` starter prompt is **Webflow-only**. This client-side
 skill gives the same kind of robots.txt guidance to **every** user (Shopify, WordPress,

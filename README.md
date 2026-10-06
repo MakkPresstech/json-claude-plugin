@@ -1,6 +1,6 @@
-# JSONSchemaApp MCP — Claude Code Plugin
+# JSON Schema App MCP — Claude Code Plugin
 
-Connects Claude to the **JSONSchemaApp MCP server** (`https://mcp.jsonschemaapp.com/mcp`) so you can check structured data (JSON-LD / Schema.org), scan your site, audit AI-crawler access, and read your structured-data report — right from Claude.
+Connects Claude to the **JSON Schema App MCP server** (`https://mcp.jsonschemaapp.com/mcp`) so you can check structured data (JSON-LD / Schema.org), scan your site, audit AI-crawler access, and read your structured-data report — right from Claude.
 
 This plugin is a **client**: it only connects to the hosted MCP server. It does not change or redeploy any server code, so nothing in the existing MCP/app flow is affected.
 
